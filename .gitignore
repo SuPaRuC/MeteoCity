@@ -1,2 +1,8 @@
 # Personal environment file
 .env
+
+# JSON package lock
+package-lock.json
+
+# All node modules
+node_modules
