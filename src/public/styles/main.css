@@ -1,5 +1,5 @@
 /* SECTION - General style */
-button {
+#login-button, #signup-button {
   margin: 2px;
 }
 
