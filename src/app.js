@@ -1,4 +1,6 @@
 // All requires
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const express = require('express');
 const axios = require("axios");
 const path = require('path');
@@ -6,6 +8,17 @@ require('dotenv/config');
 
 // Tell the app to use express
 const app = express();
+
+app.use(session({
+  secret: process.env.SESSION_KEY,
+  resave: false,
+  saveUninitialized: false,
+  // secure: true require HTTPS wich we don't have since we're on localhost, maxAge in milliseconds
+  cookie: {secure: false, maxAge: 3600000} 
+}));
+
+// Tell app to use cookie parser
+app.use(cookieParser());
 
 // Tell express to look for the static views in public folder & what engine to use
 app.set('views', path.join(__dirname, 'views'));
