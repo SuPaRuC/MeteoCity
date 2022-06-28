@@ -39,6 +39,7 @@ async function searchCityForecast (city) {
       maxZoom: 20
     }).addTo(myMap);
 
+    // Show the marker in the correct position
     let pos = L.marker([lat, lon]).addTo(myMap);
     pos.bindPopup('Sei qui!');
   } catch (err) {
@@ -77,6 +78,7 @@ async function getCityByLocation (lat, lon) {
       maxZoom: 20
     }).addTo(myMap);
 
+    // Show the marker in the correct position
     let pos = L.marker([lat, lon]).addTo(myMap);
     pos.bindPopup('Sei qui!');
 }
