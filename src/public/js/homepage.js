@@ -23,6 +23,23 @@ async function getUserWeatherInfo (lat, lon) {
   const weatherResponse = await validator(`/api/v1/getPositionalWeather/${lat}/${lon}`);
   document.getElementById('user-position').innerText = 'Posizione rilevata: ' + weatherResponse.name;
   document.getElementById('user-temp').innerText = 'Temperatura: ' + weatherResponse.main.temp + '°C';
+
+  // Save the city to localstorage
+  const city = {
+    cityName: weatherResponse.name,
+    date: new Date().getTime()
+  };
+
+  localStorage.setItem('City', JSON.stringify(city));
+}
+
+// Function that loads details of the city directly from the homepage
+// @author Luca Parenti <luca.parenti1@studenti.unimi.it>
+function loadDetails () {
+  var city = localStorage.getItem('City');
+  city = JSON.parse(city);
+  const cityName = city.cityName;
+  window.location.href = '/cities?cityName=' + cityName;
 }
 
 // Made the entire weather load whenever a user get in the homepage
