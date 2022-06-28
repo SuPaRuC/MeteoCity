@@ -37,6 +37,10 @@ app.get('/cities', (req, res) => {
   res.render('cities.html');
 });
 
+app.get('/register', (req, res) => {
+  res.render('register.html');
+});
+
 // SECTION - APIs
 app.get('/api/v1/getCityWeather/:city', (req, res) => {
   const city = req.params.city;
