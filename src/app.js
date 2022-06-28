@@ -31,5 +31,14 @@ app.get('/api/v1/getCityWeather/:city', (req, res) => {
     .catch((err) => res.json({error: `Città non trovata, Info: ${err}`}));
 });
 
+app.get('/api/v1/getPositionalWeather/:lat/:lon', (req, res) => {
+  const lat = req.params.lat;
+  const lon = req.params.lon;
+
+  axios.get(`${process.env.WEATHER_API_LINK}?lat=${lat}&lon=${lon}&appid=${process.env.WEATHER_API_KEY}&units=metric&lang=it`)
+    .then((weather) => res.send(weather.data))
+    .catch((err) => res.json({error: `Città non trovata, Info: ${err}`}));
+});
+
 // Start listenting to port 3000
 app.listen(3000);
