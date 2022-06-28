@@ -45,16 +45,6 @@ function loadDetails () {
 // Made the entire weather load whenever a user get in the homepage
 // @author Luca Parenti <luca.parenti1@studenti.unimi.it>
 document.addEventListener('DOMContentLoaded', () => {
-  // Clear localstorage after some time
-  var city = localStorage.getItem('City');
-  city = JSON.parse(city);
-  var date = city.date;
-  var today = new Date().getTime();
-
-  if (today - date > (1000 * 86400)) {
-    localStorage.clear()
-  }
-
   navigator.geolocation.getCurrentPosition((position) => {
     const { latitude, longitude } = position.coords;
     getUserWeatherInfo(latitude, longitude);
