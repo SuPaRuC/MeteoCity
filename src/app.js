@@ -1,6 +1,8 @@
 // All requires
+const User = require('./public/js/models/User');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const express = require('express');
 const axios = require("axios");
@@ -21,6 +23,9 @@ app.use(session({
 // Tell app to use cookie parser
 app.use(cookieParser());
 
+// Every time we get a request we make sure that's correctly interpretated
+app.use(bodyParser.json());
+
 // Tell express to look for the static views in public folder & what engine to use
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -40,6 +45,10 @@ app.get('/cities', (req, res) => {
 
 app.get('/register', (req, res) => {
   res.render('register.html');
+});
+
+app.get('/users', (req, res) => {
+  console.log(req.body);
 });
 
 // SECTION - DB connection
