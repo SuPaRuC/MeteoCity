@@ -1,6 +1,7 @@
 // All requires
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const mongoose = require('mongoose');
 const express = require('express');
 const axios = require("axios");
 const path = require('path');
@@ -40,6 +41,13 @@ app.get('/cities', (req, res) => {
 app.get('/register', (req, res) => {
   res.render('register.html');
 });
+
+// SECTION - DB connection
+mongoose.connect(
+  process.env.MONGODB_CONN, 
+  { useNewUrlParser: true }, 
+  () => { console.log('Connected to DB!') }
+);
 
 // SECTION - APIs
 app.get('/api/v1/getCityWeather/:city', (req, res) => {
