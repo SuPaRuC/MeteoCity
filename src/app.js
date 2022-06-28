@@ -47,8 +47,20 @@ app.get('/register', (req, res) => {
   res.render('register.html');
 });
 
-app.get('/users', (req, res) => {
-  console.log(req.body);
+app.post('/users', (req, res) => {
+  const user = new User({
+    email: req.body.email,
+    password: req.body.password,
+    favourites: req.body.favourites
+  });
+
+  user.save()
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => {
+      console.log(err)
+    })
 });
 
 // SECTION - DB connection
