@@ -13,22 +13,25 @@ async function validator (url) {
 async function searchCityForecast (city) {
   try {
     const weatherResponse = await validator(`/api/v1/getCityWeather/${city}`);
-    lat = weatherResponse.coord.lat;
-    lon = weatherResponse.coord.lon;
     
     if (weatherResponse.name === undefined) {
       document.getElementById('pos').innerText = 'Posizione: Sconosciuta';
     } else {
       document.getElementById('pos').innerText = 'Posizione: ' + city;
+      
+      // Calculate lat and lon
+      lat = weatherResponse.coord.lat;
+      lon = weatherResponse.coord.lon;
+
+      // Show all details to the view
+      document.getElementById('temp').innerText = 'Temperatura: ' + weatherResponse.main.temp + ' °C';
+      document.getElementById('temp-maxmin').innerText = 
+        'Temperatura (massima e minima): ' + weatherResponse.main.temp_max + ' - ' + weatherResponse.main.temp_min + ' °C';
+      document.getElementById('temp-perc').innerText = 'Temperatura percepita: ' + weatherResponse.main.feels_like + ' °C';
+      document.getElementById('hum').innerText = 'Umidità: ' + weatherResponse.main.humidity;
+      document.getElementById('descr').innerText = 'Descrizione: ' + weatherResponse.weather[0].description;
+      document.getElementById('wind').innerText = 'Vento: ' + weatherResponse.wind.speed + ' Km/H';
     }
-    
-    document.getElementById('temp').innerText = 'Temperatura: ' + weatherResponse.main.temp + ' °C';
-    document.getElementById('temp-maxmin').innerText = 
-      'Temperatura (massima e minima): ' + weatherResponse.main.temp_max + ' - ' + weatherResponse.main.temp_min + ' °C';
-    document.getElementById('temp-perc').innerText = 'Temperatura percepita: ' + weatherResponse.main.feels_like + ' °C';
-    document.getElementById('hum').innerText = 'Umidità: ' + weatherResponse.main.humidity;
-    document.getElementById('descr').innerText = 'Descrizione: ' + weatherResponse.weather[0].description;
-    document.getElementById('wind').innerText = 'Vento: ' + weatherResponse.wind.speed + ' Km/H';
 
     // Create a visual map
     let myMap = L.map('map').setView([lat, lon], 10);
