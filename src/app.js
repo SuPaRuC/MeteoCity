@@ -4,21 +4,24 @@ const axios = require("axios");
 const path = require('path');
 require('dotenv/config');
 
-// Tell the app to use express to render the pages
+// Tell the app to use express
 const app = express();
 
-// Tell express to look for the static views in public folder
-app.use(express.static(path.join(__dirname, 'public')));
+// Tell express to look for the static views in public folder & what engine to use
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.engine('.html', require('ejs').renderFile);
 
 // Tell express to look for the static css files in styles folder
-app.use(express.static(path.join(__dirname, 'styles')));
-
-// Tell express to look for the static files in js folder
-app.use(express.static(path.join(__dirname, 'js')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // SECTION - Routes
 app.get('/', (req, res) => {
   res.render('index.html');
+});
+
+app.get('/cities', (req, res) => {
+  res.render('cities.html');
 });
 
 // SECTION - APIs
