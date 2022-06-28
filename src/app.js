@@ -13,9 +13,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Tell express to look for the static css files in styles folder
 app.use(express.static(path.join(__dirname, 'styles')));
 
-// Tell express to look for the static files in utils folder
-app.use(express.static(path.join(__dirname, 'utils')));
-
 // Tell express to look for the static files in js folder
 app.use(express.static(path.join(__dirname, 'js')));
 
