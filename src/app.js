@@ -8,6 +8,9 @@ const app = express();
 // Tell express to look for the static views in public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Tell express to look for the static css files in styles folder
+app.use(express.static(path.join(__dirname, 'styles')));
+
 // SECTION - Routes
 app.get('/', (req, res) => {
   res.render('index.html');
