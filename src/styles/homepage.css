@@ -13,6 +13,14 @@ button {
   margin-right: 5px;
 }
 
+.my-city {
+  margin-bottom: 20px;
+}
+
+#footer {
+  margin-top: 20px;
+}
+
 /* SECTION - Carousel style */
 .carousel-item {
   width: 100%;
