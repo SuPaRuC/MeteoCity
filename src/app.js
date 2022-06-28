@@ -11,6 +11,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Tell express to look for the static css files in styles folder
 app.use(express.static(path.join(__dirname, 'styles')));
 
+// Tell express to look for the static files in utils folder
+app.use(express.static(path.join(__dirname, 'utils')));
+
 // SECTION - Routes
 app.get('/', (req, res) => {
   res.render('index.html');
