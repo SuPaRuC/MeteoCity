@@ -12,6 +12,7 @@
       crossorigin="anonymous"
     >
     <link rel="stylesheet" type="text/css" href="styles/main.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/register.css"/>
     <title>MeteoCity ☀️</title>
   </head>
   <body>
@@ -39,7 +40,7 @@
           <div class="collapse navbar-collapse" id="navbar-toggler">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Homepage 🏯</a>
+                <a class="nav-link" aria-current="page" href="/">Homepage 🏯</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="/cities">Città 🌐</a>
@@ -67,7 +68,32 @@
 
     <!-- SETCION - Main section -->
     <main>
-
+      <form>
+        <div class="d-flex justify-content-around flex-column">
+          <div class="form-group">
+            <label for="email">Indirizzo mail</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              id="email" 
+              aria-describedby="emailHelp"
+              placeholder="Inserisci email..."
+              required
+            >
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input 
+              type="password" 
+              class="form-control" 
+              id="password" 
+              placeholder="Inserisci password..."
+              required
+            >
+          </div>
+          <button type="submit" class="btn btn-primary">Registrati</button>
+        </div>
+      </form>
     </main>
 
     <!-- SECTION - Footer -->
