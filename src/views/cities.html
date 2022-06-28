@@ -11,6 +11,12 @@
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
     >
+    <link 
+      rel="stylesheet" 
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin="" 
+    />
     <link rel="stylesheet" type="text/css" href="styles/cities.css"/>
     <title>MeteoCity ☀️</title>
   </head>
@@ -19,13 +25,11 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <iframe
-            style="border: none"
-            width="50"
-            height="50"
-            src="https://rive.app/s/zRyL2zStlUu7mpo1Nm182w/embed"
+          <img 
+            class="logo"
+            src="https://play-lh.googleusercontent.com/34vH94Vt3JFW_jsCMlBdNRdniMCcrMdwOygi-hfipjLzzGZMfApjeO8SaOdQ2mn5FVA" 
+            alt="Logo"
           >
-          </iframe>
           <a style="margin-left: 5px;" class="navbar-brand" href="/"> MeteoCity </a>
           <button
             class="navbar-toggler"
@@ -68,11 +72,40 @@
     </header>
 
     <main>
-      <!-- SECTION - Interactive Map -->
-      <div></div>
+      <!-- SECTION - Search bar -->
+      <form action="/cities" method="GET">
+        <div class="form-group d-flex justify-content-center">
+          <div>
+            <input 
+              class="search form-control text-white bg-dark" 
+              type="search" 
+              placeholder="Cerca qualunque città..."
+              name="cityName"
+              required
+            >
+          </div>
+          <div>
+            <button type="submit" class="search-button btn btn-success">Cerca</button>
+          </div>
+        </div>
+      </form>
 
-      <!-- SECTION - Forecast details -->
-      <div></div>
+      <!-- SECTION - Interactive -->
+      <div style="text-align: center;" class="d-flex justify-content-around flex-sm-row flex-column">
+        <!-- SECTION - Interactive Map -->
+        <div id="map"></div>
+
+        <!-- SECTION - Forecast details -->
+        <div id="forecast">
+          <h2 id="pos">Posizione: </h2>
+          <p id="temp">Temperatura: </p>
+          <p id="temp-maxmin">Temperatura (massima e minima): </p>
+          <p id="temp-perc">Temperatura percepita: </p>
+          <p id="hum">Umidità: </p>
+          <p id="descr">Descrizione: </p>
+          <p id="wind">Vento: </p>
+        </div>
+      </div>
     </main>
 
     <!-- SECTION - Scripts - Load all the scripts -->
@@ -80,9 +113,14 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
       crossorigin="anonymous"
-    >
-    </script>
+    ></script>
+    <script 
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
     <script src="js/helpers/theme.js"></script>
     <script src="js/helpers/forecast-loader.js"></script>
+    <script src="js/cities.js"></script>
   </body>
 </html>
