@@ -4,6 +4,34 @@ button {
   margin: 2px;
 }
 
+#map, #forecast {
+  margin-top: 50px;
+}
+
+#map {
+  height: 400px;
+  width: 400px;
+}
+
+#pos {
+  margin-bottom: 50px;
+}
+
+.logo {
+  width: 50px; 
+  height: 50px; 
+  border-radius: 5px;
+}
+
+.search {
+  margin-top: 10px;
+  margin-right: 2px;
+}
+
+.search-button {
+  margin-top: 10px;
+}
+
 .dark-mode-toggle {
   margin-bottom: 5px;
 }
