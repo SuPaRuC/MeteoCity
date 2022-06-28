@@ -52,14 +52,14 @@
             <div class="d-flex dark-mode-toggle">
               <span class="toggle-icons">☀️</span>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" id="darkModeToggle" onclick="checkTheme()">
                 <span class="slider round"></span>
               </label>
               <span class="toggle-icons">🌙</span>
             </div>
             <div class="d-flex">
-              <button type="button" class="btn btn-outline-dark">Accedi</button>
-              <button type="button" class="btn btn-outline-dark">Registrati</button>
+              <button type="button" id="login-button" class="btn btn-outline-dark">Accedi</button>
+              <button type="button" id="signup-button" class="btn btn-outline-dark">Registrati</button>
             </div>
           </div>        
         </div>       
@@ -71,5 +71,6 @@
       crossorigin="anonymous"
     >
     </script>
+    <script src="helpers/theme.js"></script>
   </body>
 </html>
