@@ -61,7 +61,7 @@ app.get('/dashboard', async (req, res) => {
 
     res.render('dashboard', {favourites: response.favourites});
   } else {
-    res.render('dashboard');
+    res.render('login.html');
   }
 });
 
