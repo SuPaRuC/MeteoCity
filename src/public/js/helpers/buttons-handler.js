@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     button is shown only whenever a user is logged in
   */
   try {
-    var favourites = document.getElementById('button-favs');
+    var favourites = document.getElementById('button-favs-add');
 
     if (isLogged) {
       favourites.classList.remove('hidden');
