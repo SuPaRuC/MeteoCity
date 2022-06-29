@@ -1,8 +1,22 @@
-#not-logged, #dashboard {
-  padding: 100px;
+#dashboard {
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .inform-text {
   text-align: center;
   font-size: 20px;
+}
+
+.card {
+  height: 200px;
+  width: 200px;
+}
+
+.card-header {
+  color: black;
+}
+
+.card-body {
+  text-align: center;
 }
