@@ -1,4 +1,5 @@
 // All requires
+const { hashPwd } = require('./public/js/helpers/pwd-hasher');
 const User = require('./public/js/models/User');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -47,22 +48,6 @@ app.get('/register', (req, res) => {
   res.render('register.html');
 });
 
-app.post('/users', (req, res) => {
-  const user = new User({
-    email: req.body.email,
-    password: req.body.password,
-    favourites: req.body.favourites
-  });
-
-  user.save()
-    .then(data => {
-      res.json(data);
-    })
-    .catch(err => {
-      console.log(err)
-    })
-});
-
 // SECTION - DB connection
 mongoose.connect(
   process.env.MONGODB_CONN, 
@@ -70,7 +55,7 @@ mongoose.connect(
   () => { console.log('Connected to DB!') }
 );
 
-// SECTION - APIs
+// SECTION - Weather APIs
 app.get('/api/v1/getCityWeather/:city', (req, res) => {
   const city = req.params.city;
 
@@ -87,6 +72,46 @@ app.get('/api/v1/getPositionalWeather/:lat/:lon', (req, res) => {
   axios.get(`${process.env.WEATHER_API_LINK}?lat=${lat}&lon=${lon}&appid=${process.env.WEATHER_API_KEY}&units=metric&lang=it`)
     .then((weather) => res.send(weather.data))
     .catch((err) => res.json({error: `Città non trovata, Info: ${err}`}));
+});
+
+// SECTION - User APIs
+app.post('/api/v1/users/signup', async (req, res) => {
+  const user = new User({
+    email: req.body.email,
+    password: hashPwd(req.body.password),
+    favourites: req.body.favourites
+  });
+
+  const confirm = hashPwd(req.body.confirmPassword);
+
+  if (user.password === confirm) {
+    await user.save()
+      .then(data => {
+        res.status(200);
+        res.json(data);
+      })
+      .catch(err => {
+        res.statusMessage = 'Errore in fase di creazione utente';
+        res.status(422);
+        res.json({error: `Errore, Info: ${err}`});
+      })
+  } else {
+    res.status(400);
+    res.json({error: 'Le password non coincidono!'});
+  }
+});
+
+app.post('/api/v1/users/login', async (req, res) => {
+  await User.find({
+    email: req.body.email,
+    password: hashPwd(req.body.password)
+  }).then(data => {
+    res.status(200);
+    res.json(data);
+  }).catch(err => {
+    res.status(400);
+    res.send({error: `Info: ${err}`})
+  });
 });
 
 // Start listenting to port 3000
