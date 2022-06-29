@@ -9,3 +9,12 @@ form {
 button {
   margin-top: 10px;
 }
+
+label {
+  margin-bottom: 5px;
+}
+
+#response {
+  margin-top: 20px;
+  font-size: 18px;
+}
