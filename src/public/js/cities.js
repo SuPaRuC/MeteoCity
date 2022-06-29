@@ -65,25 +65,25 @@ async function getCityByLocation (lat, lon) {
 
   document.getElementById('pos').innerText = 'Posizione: ' + weatherResponse.name;
   document.getElementById('temp').innerText = 'Temperatura: ' + weatherResponse.main.temp + ' °C';
-    document.getElementById('temp-maxmin').innerText = 
-      'Temperatura (massima e minima): ' + weatherResponse.main.temp_max + ' - ' + weatherResponse.main.temp_min + ' °C';
-    document.getElementById('temp-perc').innerText = 'Temperatura percepita: ' + weatherResponse.main.feels_like + ' °C';
-    document.getElementById('hum').innerText = 'Umidità: ' + weatherResponse.main.humidity;
-    document.getElementById('descr').innerText = 'Descrizione: ' + weatherResponse.weather[0].description;
-    document.getElementById('wind').innerText = 'Vento: ' + weatherResponse.wind.speed + ' Km/H';
+  document.getElementById('temp-maxmin').innerText = 
+    'Temperatura (massima e minima): ' + weatherResponse.main.temp_max + ' - ' + weatherResponse.main.temp_min + ' °C';
+  document.getElementById('temp-perc').innerText = 'Temperatura percepita: ' + weatherResponse.main.feels_like + ' °C';
+  document.getElementById('hum').innerText = 'Umidità: ' + weatherResponse.main.humidity;
+  document.getElementById('descr').innerText = 'Descrizione: ' + weatherResponse.weather[0].description;
+  document.getElementById('wind').innerText = 'Vento: ' + weatherResponse.wind.speed + ' Km/H';
 
-    // Create a visual map
-    let myMap = L.map('map').setView([lat, lon], 10);
+  // Create a visual map
+  let myMap = L.map('map').setView([lat, lon], 10);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      // Attribution is obligatory as per copyright!
-      maxZoom: 20
-    }).addTo(myMap);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    // Attribution is obligatory as per copyright!
+    maxZoom: 20
+  }).addTo(myMap);
 
-    // Show the marker in the correct position
-    let pos = L.marker([lat, lon]).addTo(myMap);
-    pos.bindPopup('Sei qui!');
+  // Show the marker in the correct position
+  let pos = L.marker([lat, lon]).addTo(myMap);
+  pos.bindPopup('Sei qui!');
 }
 
 // Load the info whenever the page loads
