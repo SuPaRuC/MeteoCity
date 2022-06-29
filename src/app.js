@@ -53,11 +53,16 @@ app.get('/login', (req, res) => {
   res.render('login.html');
 });
 
-app.get('/dashboard', (req, res) => {
+app.get('/dashboard', async (req, res) => {
   if (req.session.email !== undefined) {
-    console.log(req.session.email);
+    const response = await User.findOne({
+      email: req.session.email
+    });
+
+    res.render('dashboard', {favourites: response.favourites});
+  } else {
+    res.render('dashboard');
   }
-  res.render('dashboard');
 });
 
 // SECTION - DB connection
