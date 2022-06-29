@@ -1,0 +1,27 @@
+{
+  "name": "meteocity",
+  "version": "1.0.0",
+  "description": "Meteo App for 'Programmazione Web e Mobile' exam",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuPaRuC/MeteoCity.git"
+  },
+  "author": "Luca Parenti - luca.parenti1@studenti.unimi.it",
+  "license": "ISC",
+  "homepage": "https://github.com/SuPaRuC/MeteoCity#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "mongoose": "^6.4.1",
+    "nodemon": "^2.0.18"
+  }
+}

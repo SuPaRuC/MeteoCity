@@ -1,0 +1,22 @@
+/* SECTION - General style */
+#map, #forecast {
+  margin-top: 50px;
+}
+
+#map {
+  height: 400px;
+  width: 400px;
+}
+
+#pos {
+  margin-bottom: 50px;
+}
+
+.search {
+  margin-top: 10px;
+  margin-right: 2px;
+}
+
+.search-button {
+  margin-top: 10px;
+}

@@ -1,0 +1,10 @@
+/* SECTION - General style */
+.my-city {
+  margin-bottom: 20px;
+}
+
+/* SECTION - Carousel style */
+.carousel-item {
+  width: 100%;
+  height: 20%;
+}
