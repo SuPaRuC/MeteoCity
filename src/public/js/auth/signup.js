@@ -25,6 +25,8 @@ async function signup (event) {
   if ('error' in message && message.error !== null) {
     document.getElementById('response').innerText = 'Errore nella registrazione, Info: ' + message.error;
   } else {
-    document.getElementById('response').innerText = 'Ti sei registrato!';
+    sessionStorage.setItem('logged', true);
+    sessionStorage.setItem('email', message.email);
+    location.href = '/';
   }
 }

@@ -24,6 +24,6 @@ async function login (event) {
   } else {
     sessionStorage.setItem('logged', true);
     sessionStorage.setItem('email', message.email);
-    document.getElementById('response').innerText = 'Ti sei loggato!';
+    location.href = '/';
   }
 }
