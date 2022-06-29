@@ -8,6 +8,7 @@ It contains login and logout implementations, dark mode and a visual map to see 
 ## Requirements
 - `nodeJS`
 - `npm`
+- `mongoDB`
 - Last but not least a web browser 😜
 
 ## Installation steps
