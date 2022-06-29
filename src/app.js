@@ -48,6 +48,10 @@ app.get('/register', (req, res) => {
   res.render('register.html');
 });
 
+app.get('/login', (req, res) => {
+  res.render('login.html');
+});
+
 // SECTION - DB connection
 mongoose.connect(
   process.env.MONGODB_CONN, 
