@@ -106,7 +106,7 @@ app.post('/api/v1/users/signup', async (req, res) => {
 });
 
 app.post('/api/v1/users/login', async (req, res) => {
-  await User.find({
+  await User.findOne({
     email: req.body.email,
     password: hashPwd(req.body.password)
   }).then(data => {
