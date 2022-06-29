@@ -60,6 +60,7 @@
             <div class="d-flex">
               <a href="/login" id="login-button" class="btn btn-outline-dark">Accedi</a>
               <a href="/register" id="signup-button" class="btn btn-outline-dark">Registrati</a>
+              <a href="/" onclick="logout()" id="logout-button" class="hidden btn btn-outline-dark">Logout</a>
             </div>
           </div>
         </div>
@@ -139,7 +140,9 @@
       crossorigin="anonymous"
     >
     </script>
+    <script src="js/helpers/buttons-handler.js"></script>
     <script src="js/helpers/theme.js"></script>
     <script src="js/homepage.js"></script>
+    <script src="js/auth/logout.js"></script>
   </body>
 </html>

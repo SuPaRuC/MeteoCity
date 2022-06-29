@@ -30,11 +30,13 @@ function activateDarkMode () {
     document.body.classList.add('text-light');
   }
 
-  // Change the login and signup buttons
+  // Change the login, logout and signup buttons
   var loginButton = document.getElementById('login-button');
   var signupButton = document.getElementById('signup-button');
+  var logoutButton = document.getElementById('logout-button');
   loginButton.classList.replace('btn-outline-dark', 'btn-outline-light');
   signupButton.classList.replace('btn-outline-dark', 'btn-outline-light');
+  logoutButton.classList.replace('btn-outline-dark', 'btn-outline-light');
 
   // Save the theme to localstorage
   const theme = {
@@ -63,11 +65,13 @@ function activateLightMode () {
     document.body.classList.add('text-dark');
   }
 
-  // Change the login and signup buttons
+  // Change the login, logout and signup buttons
   var loginButton = document.getElementById('login-button');
   var signupButton = document.getElementById('signup-button');
+  var logoutButton = document.getElementById('logout-button');
   loginButton.classList.replace('btn-outline-light', 'btn-outline-dark');
   signupButton.classList.replace('btn-outline-light', 'btn-outline-dark');
+  logoutButton.classList.replace('btn-outline-light', 'btn-outline-dark');
 
   // Save the theme to localstorage
   const theme = {
