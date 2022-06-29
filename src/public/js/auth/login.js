@@ -22,6 +22,8 @@ async function login (event) {
   if (message === null) {
     document.getElementById('response').innerText = 'Non riusciamo a trovarti 😢 Controlla le credenziali!';
   } else {
+    sessionStorage.setItem('logged', true);
+    sessionStorage.setItem('email', message.email);
     document.getElementById('response').innerText = 'Ti sei loggato!';
   }
 }
