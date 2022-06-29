@@ -122,5 +122,39 @@ app.post('/api/v1/users/login', async (req, res) => {
   });
 });
 
+// SECTION - favourites city
+app.post('/api/v1/users/get-favourites', async (req, res) => {
+  await User.findOne({
+    email: req.body.email
+  }).then(data => {
+    res.status(200);
+    res.json(data.favourites);
+  }).catch(err => {
+    res.status(400);
+    res.send({error: `Info: ${err}`})
+  });
+});
+
+app.patch('/api/v1/users/save-favourite', async (req, res) => {
+  const email = req.body.email;
+  const cityName = req.body.cityName;
+  var favourites = req.body.favourites;
+  
+  if (cityName !== '') {
+    favourites.push(cityName);
+  }
+
+  await User.updateOne(
+    { email: email }, 
+    { $set: { favourites: favourites } }
+  ).then(data => {
+    res.status(200);
+    res.json({data: data, status: 200})
+  }).catch(err => {
+    res.status(422);
+    res.send({error: `Info: ${err}`})
+  })
+});
+
 // Start listenting to port 3000
 app.listen(3000);
