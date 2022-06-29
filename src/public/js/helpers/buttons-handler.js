@@ -6,19 +6,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   var signup = document.getElementById('signup-button');
   var logout = document.getElementById('logout-button');
 
+  /*
+    If we're on cities section we have to make sure that the favourites
+    button is shown only whenever a user is logged in
+  */
   try {
-    var dashboard = document.getElementById('dashboard');
-    var notLoggedDashboard = document.getElementById('not-logged');
+    var favourites = document.getElementById('button-favs');
 
     if (isLogged) {
-      dashboard.classList.remove('hidden');
-      notLoggedDashboard.classList.add('hidden');
+      favourites.classList.remove('hidden');
     } else {
-      dashboard.classList.add('hidden');
-      notLoggedDashboard.classList.remove('hidden');
+      favourites.classList.add('hidden');
     }
   } catch (err) {
-    // Nothing to do, we're not on dashboard page
+    // Do nothing since we're not on cities section
   }
   
   // If user's not logged show login and signup buttons, otherwise don't
