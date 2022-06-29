@@ -18,6 +18,11 @@
   border-radius: 5px;
 }
 
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
 #footer {
   margin-top: 20px;
 }

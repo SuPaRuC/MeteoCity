@@ -12,6 +12,7 @@
       crossorigin="anonymous"
     >
     <link rel="stylesheet" type="text/css" href="styles/main.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/signup-login.css"/>
     <title>MeteoCity ☀️</title>
   </head>
   <body>
@@ -39,13 +40,13 @@
           <div class="collapse navbar-collapse" id="navbar-toggler">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Homepage 🏯</a>
+                <a class="nav-link" aria-current="page" href="/">Homepage 🏯</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="/cities">Città 🌐</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/">Area personale 🔐</a>
+                <a class="nav-link" aria-current="page" href="/dashboard">Area personale 🔐</a>
               </li>
             </ul>
             <div class="d-flex dark-mode-toggle">
@@ -57,13 +58,59 @@
               <span class="toggle-icons">🌙</span>
             </div>
             <div class="d-flex">
-              <a href="/" id="login-button" class="btn btn-outline-dark">Accedi</a>
+              <a href="/login" id="login-button" class="btn btn-outline-dark">Accedi</a>
               <a href="/register" id="signup-button" class="btn btn-outline-dark">Registrati</a>
+              <a href="/" onclick="logout()" id="logout-button" class="hidden btn btn-outline-dark">Logout</a>
             </div>
           </div>
         </div>
       </nav>
     </header>
+
+    <!-- SETCION - Main section -->
+    <main>
+      <form onsubmit="return signup(event)">
+        <div class="d-flex justify-content-around flex-column">
+          <div class="form-group">
+            <label for="email">Indirizzo mail</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              id="email" 
+              name="email"
+              aria-describedby="emailHelp"
+              placeholder="Inserisci email..."
+              required
+            >
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input 
+              type="password" 
+              class="form-control" 
+              id="password"
+              name="password" 
+              placeholder="Inserisci password..."
+              required
+            >
+          </div>
+          <div class="form-group">
+            <label for="password">Conferma Password</label>
+            <input 
+              type="password" 
+              class="form-control" 
+              id="confirm-password" 
+              name="confirm-password"
+              placeholder="Inserisci password..."
+              required
+            >
+          </div>
+          <button type="submit" class="btn btn-primary">Registrati</button>
+
+          <div id="response"></div>
+        </div>
+      </form>
+    </main>
 
     <!-- SECTION - Footer -->
     <footer id="footer" class="text-center bg-light">
@@ -79,6 +126,9 @@
       crossorigin="anonymous"
     >
     </script>
+    <script src="js/helpers/buttons-handler.js"></script>
     <script src="js/helpers/theme.js"></script>
+    <script src="js/auth/signup.js"></script>
+    <script src="js/auth/logout.js"></script>
   </body>
 </html>
