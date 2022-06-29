@@ -52,6 +52,10 @@ app.get('/login', (req, res) => {
   res.render('login.html');
 });
 
+app.get('/dashboard', (req, res) => {
+  res.render('dashboard');
+});
+
 // SECTION - DB connection
 mongoose.connect(
   process.env.MONGODB_CONN, 
