@@ -24,6 +24,7 @@ It contains login and logout implementations, dark mode and a visual map to see 
   ```
   npm install
   ```
+- Start `MongoDB` $\to$ refer to MongoDB documentation on how to start mongoDB for your system ( [documentation](https://www.mongodb.com/docs/manual/administration/install-community/) )
 - Start `npm`
   ```
   npm start
@@ -33,6 +34,6 @@ It contains login and logout implementations, dark mode and a visual map to see 
   http://localhost:3000
   ```
 
-#### It's still a work in progress project.<br>You can find all the changes & what I'm working on in develop/feature branches. 🚀
+**<ins>NOTE</ins>**: *It's still a work in progress project.<br>You can find all the changes & what I'm working on in develop/feature branches. 🚀*
 
-Luca Parenti
+&copy; Luca Parenti
