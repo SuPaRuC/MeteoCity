@@ -13,6 +13,13 @@ require('dotenv/config');
 // Tell the app to use express
 const app = express();
 
+// Every time we get a request we make sure that's correctly interpretated
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Tell app to use cookie parser
+app.use(cookieParser());
+app.use(express.json());
+
 app.use(session({
   secret: process.env.SESSION_KEY,
   resave: false,
@@ -20,12 +27,6 @@ app.use(session({
   // secure: true require HTTPS wich we don't have since we're on localhost, maxAge in milliseconds
   cookie: {secure: false, maxAge: 3600000} 
 }));
-
-// Tell app to use cookie parser
-app.use(cookieParser());
-
-// Every time we get a request we make sure that's correctly interpretated
-app.use(bodyParser.json());
 
 // Tell express to look for the static views in public folder & what engine to use
 app.set('views', path.join(__dirname, 'views'));
@@ -52,8 +53,16 @@ app.get('/login', (req, res) => {
   res.render('login.html');
 });
 
-app.get('/dashboard', (req, res) => {
-  res.render('dashboard');
+app.get('/dashboard', async (req, res) => {
+  if (req.session.email !== undefined) {
+    const response = await User.findOne({
+      email: req.session.email
+    });
+
+    res.render('dashboard', {favourites: response.favourites});
+  } else {
+    res.render('login.html');
+  }
 });
 
 // SECTION - DB connection
@@ -114,12 +123,53 @@ app.post('/api/v1/users/login', async (req, res) => {
     email: req.body.email,
     password: hashPwd(req.body.password)
   }).then(data => {
+    req.session.email = req.body.email;
     res.status(200);
     res.json(data);
   }).catch(err => {
     res.status(400);
     res.send({error: `Info: ${err}`})
   });
+});
+
+app.get('/api/v1/users/logout', async (req, res) => {
+  if (req.session.email !== undefined) {
+    req.session.destroy();
+  }
+});
+
+// SECTION - favourites city
+app.post('/api/v1/users/get-favourites', async (req, res) => {
+  await User.findOne({
+    email: req.body.email
+  }).then(data => {
+    res.status(200);
+    res.json(data.favourites);
+  }).catch(err => {
+    res.status(400);
+    res.send({error: `Info: ${err}`})
+  });
+});
+
+app.patch('/api/v1/users/update-favourite', async (req, res) => {
+  const email = req.body.email;
+  const cityName = req.body.cityName;
+  var favourites = req.body.favourites;
+  
+  if (cityName !== '') {
+    favourites.push(cityName);
+  }
+
+  await User.updateOne(
+    { email: email }, 
+    { $set: { favourites: favourites } }
+  ).then(data => {
+    res.status(200);
+    res.json({data: data, status: 200})
+  }).catch(err => {
+    res.status(422);
+    res.send({error: `Info: ${err}`})
+  })
 });
 
 // Start listenting to port 3000
