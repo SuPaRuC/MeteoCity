@@ -25,7 +25,7 @@ It contains login and logout implementations, dark mode and a visual map to see 
   npm install
   ```
 - Start `MongoDB`:
-  >Refer to MongoDB documentation on how to start mongoDB for your system ( <a href="https://www.mongodb.com/docs/manual/administration/install-community/" target="_blank">documentation</a> )
+  >Refer to MongoDB documentation on how to start mongoDB for your system ( [documentation](https://www.mongodb.com/docs/manual/administration/install-community/) )
 - Start `npm`
   ```
   npm start
