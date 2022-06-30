@@ -46,7 +46,7 @@
                 <a class="nav-link" aria-current="page" href="/cities">Città 🌐</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Area personale 🔐</a>
+                <a class="nav-link active" aria-current="page" href="/dashboard">Area personale 🔐</a>
               </li>
             </ul>
             <div class="d-flex dark-mode-toggle">
@@ -68,15 +68,23 @@
     </header>
 
     <main>
-      <div id="dashboard" class="hidden">
-        <div class="d-flex justify-content-around flex-column">
-          <p class="inform-text">Hai eseguito l'accesso!</p>
-        </div>
-      </div>
-      <div id="not-logged">
-        <div class="d-flex justify-content-around flex-column">
-          <p class="inform-text">Non hai eseguito l'accesso!</p>
-          <a href="/login" id="login-button" class="btn btn-success">Accedi</a>
+      <div id="dashboard">
+        <p class="inform-text">Le tue città:</p>
+        <div class="d-flex justify-content-around flex-sm-row flex-column">
+          <% if (favourites.length > 0) { %>
+            <% for (const city of favourites) { %>
+              <div class="card text-white bg-info mb-3">
+                <div class="card-header"><%= city %></div>
+                <div class="card-body">
+                  <a class="btn btn-outline-secondary" href=<%= `/cities?cityName=${city.replace(/ /g, "%20")}` %> >
+                    Dettagli
+                  </a>
+                </div>
+              </div>
+            <% } %>
+          <% } else { %>
+            <div>Non hai città preferite.</div>
+          <% } %>
         </div>
       </div>
     </main>
@@ -99,7 +107,9 @@
     <script src="js/helpers/theme.js"></script>
     <script src="js/auth/logout.js"></script>
     <script>
-      const isLogged = sessionStorage.getItem('logged');
+      const favs = '<%- favourites %>';
+      const favsArray = favs.split(',');
+      console.log(favsArray);
     </script>
   </body>
 </html>

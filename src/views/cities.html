@@ -87,7 +87,7 @@
             >
           </div>
           <div>
-            <button type="submit" class="search-button btn btn-success">Cerca</button>
+            <button type="submit" class="search-button btn btn-success">Cerca 🔎</button>
           </div>
         </div>
       </form>
@@ -106,9 +106,18 @@
           <p id="hum">Umidità: </p>
           <p id="descr">Descrizione: </p>
           <p id="wind">Vento: </p>
+          <button onclick="handleFavourites('add')" id="button-favs-add" class="hidden btn btn-info">Aggiungi ai preferiti</button>
+          <button onclick="handleFavourites('remove')" id="button-favs-remove" class="hidden btn btn-danger">Rimuovi dai preferiti</button>
         </div>
       </div>
     </main>
+
+    <!-- SECTION - Footer -->
+    <footer id="footer" class="text-center bg-light">
+      <h4>MeteoCity</h4>
+      <p>Non uscire più senza ombrello quando potresti averne bisogno! 🌦️</p>
+      <p>&copy; Copyright Luca Parenti - MeteoCity 2022</p>
+    </footer>
 
     <!-- SECTION - Scripts - Load all the scripts -->
     <script
