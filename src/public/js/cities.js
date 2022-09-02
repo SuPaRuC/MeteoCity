@@ -48,6 +48,11 @@ async function searchCityForecast (city) {
     // Show the marker in the correct position
     let pos = L.marker([lat, lon]).addTo(myMap);
     pos.bindPopup('Sei qui!');
+
+    myMap.on('click', async (ev) => {
+      pos.setLatLng(ev.latlng);
+      getCityByLocation(ev.latlng.lat, ev.latlng.lng, false)
+    });
   } catch (err) {
     console.log(err);
   }
@@ -55,7 +60,7 @@ async function searchCityForecast (city) {
 
 // Function that search forecast based on location
 // @author Luca Parenti <luca.parenti1@studenti.unimi.it>
-async function getCityByLocation (lat, lon) {
+async function getCityByLocation (lat, lon, check) {
   if (lat !== null && lon !== null) {
     const weatherResponse = await validator(`/api/v1/getPositionalWeather/${lat}/${lon}`);
     lat = weatherResponse.coord.lat;
@@ -78,18 +83,25 @@ async function getCityByLocation (lat, lon) {
     document.getElementById('descr').innerText = 'Descrizione: ' + weatherResponse.weather[0].description;
     document.getElementById('wind').innerText = 'Vento: ' + weatherResponse.wind.speed + ' Km/H';
 
-    // Create a visual map
-    let myMap = L.map('map').setView([lat, lon], 10);
+    // Create a visual map if not already created
+    if (check) {
+      let myMap = L.map('map').setView([lat, lon], 10);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      // Attribution is obligatory as per copyright!
-      maxZoom: 20
-    }).addTo(myMap);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        // Attribution is obligatory as per copyright!
+        maxZoom: 20
+      }).addTo(myMap);
 
-    // Show the marker in the correct position
-    let pos = L.marker([lat, lon]).addTo(myMap);
-    pos.bindPopup('Sei qui!');
+      // Show the marker in the correct position
+      let pos = L.marker([lat, lon]).addTo(myMap);
+      pos.bindPopup('Sei qui!');
+
+      myMap.on('click', async (ev) => {
+        pos.setLatLng(ev.latlng);
+        getCityByLocation(ev.latlng.lat, ev.latlng.lng, false)
+      });
+    }
   } else {
     document.getElementById('pos').innerText = 'Permessi di geolocalizzazione non concessi.';
   }
@@ -194,8 +206,10 @@ async function handleButtons (cityName) {
     // Show the correct buttons each page
     if (favourites.includes(cityName.toLowerCase())) {
       remove.classList.remove('hidden');
+      add.classList.add('hidden');
     } else {
       add.classList.remove('hidden');
+      remove.classList.add('hidden');
     }
   }
 }
@@ -214,10 +228,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (result.state === 'granted') {
         navigator.geolocation.getCurrentPosition((position) => {
           const { latitude, longitude } = position.coords;
-          getCityByLocation(latitude, longitude);
+          getCityByLocation(latitude, longitude, true);
         });
       } else {
-        getCityByLocation(null, null);
+        getCityByLocation(null, null, true);
       }
     });
   }
