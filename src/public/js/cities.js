@@ -107,6 +107,9 @@ async function getCityByLocation (lat, lon, check) {
   }
 }
 
+// Function that handles favourites cities for a specific user
+// and make calls to get & update the list of favourites.
+// @author LucaParenti <luca.parenti1@studenti.unimi.it>
 async function handleFavourites (mode) {
   const email = sessionStorage.getItem('email');
 
@@ -181,6 +184,8 @@ async function handleFavourites (mode) {
   }
 }
 
+// Function that handles buttons for adding/removing favourites cities
+// @author LucaParenti <luca.parenti1@studenti.unimi.it>
 async function handleButtons (cityName) {
   const isLogged = sessionStorage.getItem('logged');
   // Load favourites from APIs if we're logged in and show correct buttons
