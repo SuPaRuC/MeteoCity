@@ -20,17 +20,22 @@ async function getCityWeatherInfo (city) {
 // Function that calls APIs and get user based location forecast
 // @author Luca Parenti <luca.parenti1@studenti.unimi.it>
 async function getUserWeatherInfo (lat, lon) {
-  const weatherResponse = await validator(`/api/v1/getPositionalWeather/${lat}/${lon}`);
-  document.getElementById('user-position').innerText = 'Posizione rilevata: ' + weatherResponse.name;
-  document.getElementById('user-temp').innerText = 'Temperatura: ' + weatherResponse.main.temp + '°C';
+  if (lat !== null && lon !== null) {
+    const weatherResponse = await validator(`/api/v1/getPositionalWeather/${lat}/${lon}`);
+    document.getElementById('user-position').innerText = 'Posizione rilevata: ' + weatherResponse.name;
+    document.getElementById('user-temp').innerText = 'Temperatura: ' + weatherResponse.main.temp + '°C';
 
-  // Save the city to localstorage
-  const city = {
-    cityName: weatherResponse.name,
-    date: new Date().getTime()
-  };
+    // Save the city to localstorage
+    const city = {
+      cityName: weatherResponse.name,
+      date: new Date().getTime()
+    };
 
-  localStorage.setItem('City', JSON.stringify(city));
+    localStorage.setItem('City', JSON.stringify(city));
+  } else {
+    document.getElementById('user-position').innerText = 'Posizione rilevata: Nessuno (devi consentire la geolocalizzazione)';
+    document.getElementById('user-temp').innerText = 'Temperatura: Nessuno';
+  }
 }
 
 // Function that loads details of the city directly from the homepage
@@ -45,9 +50,15 @@ function loadDetails () {
 // Made the entire weather load whenever a user get in the homepage
 // @author Luca Parenti <luca.parenti1@studenti.unimi.it>
 document.addEventListener('DOMContentLoaded', () => {
-  navigator.geolocation.getCurrentPosition((position) => {
-    const { latitude, longitude } = position.coords;
-    getUserWeatherInfo(latitude, longitude);
+  navigator.permissions.query({name:'geolocation'}).then(function(result) {
+    if (result.state === 'granted') {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        getUserWeatherInfo(latitude, longitude);
+      });
+    } else {
+      getUserWeatherInfo(null, null);
+    }
   });
 
   getCityWeatherInfo("Milano");
