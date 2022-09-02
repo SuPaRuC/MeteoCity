@@ -91,3 +91,8 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 } 
+
+.footerBrandName {
+  font-size: 32px;
+  font-weight: 600;
+}
