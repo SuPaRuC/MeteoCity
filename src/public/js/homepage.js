@@ -11,7 +11,7 @@ async function getCityWeatherInfo (city) {
   try {
     const cityWithoutUppercase = city.toLowerCase();
     const weatherResponse = await validator(`/api/v1/getCityWeather/${city}`);
-    document.getElementById(`temp-${cityWithoutUppercase}`).innerText = 'Temperatura: ' + weatherResponse.main.temp + ' °C'
+    document.getElementById(`temp-${cityWithoutUppercase}`).innerText = 'Temperatura: ' + weatherResponse.main.temp + ' °C';
   } catch (err) {
     console.log(err);
   }
@@ -50,7 +50,7 @@ function loadDetails () {
 // Made the entire weather load whenever a user get in the homepage
 // @author Luca Parenti <luca.parenti1@studenti.unimi.it>
 document.addEventListener('DOMContentLoaded', () => {
-  navigator.permissions.query({name:'geolocation'}).then(function(result) {
+  navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
     if (result.state === 'granted') {
       navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
