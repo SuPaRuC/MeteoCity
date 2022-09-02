@@ -1,0 +1,18 @@
+.error {
+  padding: 10%;
+  font-size: 50px;
+  font-weight: 700;
+  text-align: center;
+}
+
+img { 
+  margin-left: 10px;
+  width: 70px;
+  height: 70px;
+}
+
+@media only screen and (max-width: 768px) {
+  img {
+    margin-left: 40%;
+  }
+}
