@@ -65,6 +65,10 @@ app.get('/dashboard', async (req, res) => {
   }
 });
 
+app.get('*', (req, res) => {
+  res.render('404.html');   
+});
+
 // SECTION - DB connection
 mongoose.connect(
   process.env.MONGODB_CONN, 
