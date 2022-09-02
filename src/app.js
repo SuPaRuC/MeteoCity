@@ -65,10 +65,6 @@ app.get('/dashboard', async (req, res) => {
   }
 });
 
-app.get('*', (req, res) => {
-  res.render('404.html');   
-});
-
 // SECTION - DB connection
 mongoose.connect(
   process.env.MONGODB_CONN, 
@@ -174,6 +170,12 @@ app.patch('/api/v1/users/update-favourite', async (req, res) => {
     res.status(422);
     res.send({error: `Info: ${err}`})
   })
+});
+
+// Catch all routes not defined to show custom 404 page
+app.use((req, res, next) => {
+  res.status(404);
+  res.render('404.html');
 });
 
 // Start listenting to port 3000
