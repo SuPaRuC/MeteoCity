@@ -47,17 +47,43 @@ function loadDetails () {
   window.location.href = '/cities?cityName=' + cityName;
 }
 
+// Function that asks the user for geolocation permissions
+// @author Luca Parenti <luca.parenti1@studenti.unimi.it>
+function geoPermission () {
+  if (confirm('Consenti geolocalizzazione, altrimenti il sito non funzionerà a dovere!')) {
+    document.getElementById('geobutton').classList.add('hidden');
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      getUserWeatherInfo(latitude, longitude);
+    });
+  } else {
+    document.getElementById('geobutton').classList.remove('hidden');
+    getUserWeatherInfo(null, null);
+  }
+}
+
 // Made the entire weather load whenever a user get in the homepage
 // @author Luca Parenti <luca.parenti1@studenti.unimi.it>
 document.addEventListener('DOMContentLoaded', () => {
   navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
     if (result.state === 'granted') {
+      document.getElementById('geobutton').classList.add('hidden');
       navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
         getUserWeatherInfo(latitude, longitude);
       });
     } else {
-      getUserWeatherInfo(null, null);
+      document.getElementById('geobutton').classList.remove('hidden');
+      if (confirm('Consenti geolocalizzazione, altrimenti il sito non funzionerà a dovere!')) {
+        document.getElementById('geobutton').classList.add('hidden');
+        navigator.geolocation.getCurrentPosition((position) => {
+          const { latitude, longitude } = position.coords;
+          getUserWeatherInfo(latitude, longitude);
+        });
+      } else {
+        document.getElementById('geobutton').classList.remove('hidden');
+        getUserWeatherInfo(null, null);
+      }
     }
   });
 
