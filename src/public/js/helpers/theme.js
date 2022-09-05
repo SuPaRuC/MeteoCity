@@ -1,7 +1,7 @@
 // This file contains functions about dark-light mode themes
 
 // This function load the mode when entering a page
-// @author Luca Parenti <luca.parenti1@studenti.unimi.it>
+// @author LucaParenti <luca.parenti1@studenti.unimi.it>
 function checkTheme () {
   const darkTheme = document.getElementById('darkModeToggle').checked;
 
@@ -13,7 +13,7 @@ function checkTheme () {
 }
 
 // This function activate the dark mode
-// @author Luca Parenti <luca.parenti1@studenti.unimi.it>
+// @author LucaParenti <luca.parenti1@studenti.unimi.it>
 function activateDarkMode () {
   // Replace all the instance in the file from ligth to dark mode
   document.querySelectorAll('.bg-light').forEach((element) => {
@@ -48,7 +48,7 @@ function activateDarkMode () {
 }
 
 // This function activate the light mode
-// @author Luca Parenti <luca.parenti1@studenti.unimi.it>
+// @author LucaParenti <luca.parenti1@studenti.unimi.it>
 function activateLightMode () {
   // Replace all the instance in the file from dark to light mode
   document.querySelectorAll('.bg-dark').forEach((element) => {
@@ -83,7 +83,7 @@ function activateLightMode () {
 }
 
 // This function load the theme from localstorage when pages loads
-// @author Luca Parenti <luca.parenti1@studenti.unimi.it>
+// @author LucaParenti <luca.parenti1@studenti.unimi.it>
 function loadTheme () {
   var theme = localStorage.getItem('Theme');
 

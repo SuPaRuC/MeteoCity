@@ -10,7 +10,7 @@ async function validator (url) {
 };
 
 // Function search forecast for a specific city
-// @author Luca Parenti <luca.parenti1@studenti.unimi.it>
+// @author LucaParenti <luca.parenti1@studenti.unimi.it>
 async function searchCityForecast (city) {
   try {
     const weatherResponse = await validator(`/api/v1/getCityWeather/${city}`);
@@ -59,7 +59,7 @@ async function searchCityForecast (city) {
 }
 
 // Function that search forecast based on location
-// @author Luca Parenti <luca.parenti1@studenti.unimi.it>
+// @author LucaParenti <luca.parenti1@studenti.unimi.it>
 async function getCityByLocation (lat, lon, check) {
   if (lat !== null && lon !== null) {
     const weatherResponse = await validator(`/api/v1/getPositionalWeather/${lat}/${lon}`);
@@ -219,8 +219,57 @@ async function handleButtons (cityName) {
   }
 }
 
+// Functions that loads radar animation for rain forecast
+// @author LucaParenti <luca.parenti1@studenti.unimi.it>
+async function showRainMap () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const city = urlParams.get("cityName");
+  
+  if (city !== null && city !== undefined) {
+    const weatherResponse = await validator(`/api/v1/getCityWeather/${city}`);
+    console.log(weatherResponse.coord.lat, weatherResponse.coord.lon);
+    const { latitude, longitude } = weatherResponse.coord;
+
+    // Check latitude
+    if (latitude > 44.11 && latitude < 46.9) {
+            
+      // Check longitude
+      if (longitude > 6.64 && longitude < 11.54) {
+        // Loads north-west radar map
+        window.open('https://cdn4.3bmeteo.com/images/radar/SWI_animation.gif', '_blank');
+      } else {
+        // Loads Italy radar map
+        window.open('https://cdn4.3bmeteo.com/images/radar/VMI_animation.gif', '_blank');
+      }
+    } else {
+      // Loads Italy radar map
+      window.open('https://cdn4.3bmeteo.com/images/radar/VMI_animation.gif', '_blank');
+    }
+  } else {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+
+      // Check latitude
+      if (latitude > 44.11 && latitude < 46.9) {
+              
+        // Check longitude
+        if (longitude > 6.64 && longitude < 11.54) {
+          // Loads north-west radar map
+          window.open('https://cdn4.3bmeteo.com/images/radar/SWI_animation.gif', '_blank');
+        } else {
+          // Loads Italy radar map
+          window.open('https://cdn4.3bmeteo.com/images/radar/VMI_animation.gif', '_blank');
+        }
+      } else {
+        // Loads Italy radar map
+        window.open('https://cdn4.3bmeteo.com/images/radar/VMI_animation.gif', '_blank');
+      }
+    });
+  }
+}
+
 // Load the info whenever the page loads
-// @author Luca Parenti <luca.parenti1@studenti.unimi.it>
+// @author LucaParenti <luca.parenti1@studenti.unimi.it>
 document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const city = urlParams.get("cityName");
