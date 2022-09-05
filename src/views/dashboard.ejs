@@ -72,10 +72,10 @@
     <main>
       <div id="dashboard">
         <p class="inform-text">Le tue città:</p>
-        <div class="d-flex justify-content-around flex-sm-row flex-column">
+        <div class="d-flex justify-content-sm-around justify-content-center flex-sm-row flex-column">
           <% if (favourites.length > 0) { %>
             <% for (const city of favourites) { %>
-              <div class="card text-white bg-info mb-3">
+              <div class="card text-white bg-info mb-3 centered-card" style="text-align: center;">
                 <div class="card-header"><%= city %></div>
                 <div class="card-body">
                   <a class="btn btn-outline-secondary" href=<%= `/cities?cityName=${city.replace(/ /g, "%20")}` %> >
@@ -111,7 +111,6 @@
     <script>
       const favs = '<%- favourites %>';
       const favsArray = favs.split(',');
-      console.log(favsArray);
     </script>
   </body>
 </html>
