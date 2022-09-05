@@ -25,3 +25,7 @@
 .centered-item {
   align-self: center;
 }
+
+#satellite-rain-map {
+  margin-left: 5px;
+}
