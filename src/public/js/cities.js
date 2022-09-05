@@ -227,7 +227,8 @@ async function showRainMap () {
   
   if (city !== null && city !== undefined) {
     const weatherResponse = await validator(`/api/v1/getCityWeather/${city}`);
-    const { latitude, longitude } = weatherResponse.coord;
+    const latitude = weatherResponse.coord.lat;
+    const longitude = weatherResponse.coord.lon;
 
     // Check latitude
     if (latitude > 44.11 && latitude < 46.9) {
