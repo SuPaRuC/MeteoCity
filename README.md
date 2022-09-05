@@ -35,6 +35,4 @@ It contains login and logout implementations, dark mode and a visual map to see 
   http://localhost:3000
   ```
 
-**<ins>NOTE</ins>**: *It's still a work in progress project.<br>You can find all the changes & what I'm working on in develop/feature branches. 🚀*
-
 Luca Parenti

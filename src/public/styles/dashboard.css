@@ -20,3 +20,9 @@
 .card-body {
   text-align: center;
 }
+
+@media only screen and (max-width: 768px) {
+  .centered-card {
+    align-self: center;
+  } 
+}
