@@ -112,6 +112,9 @@ async function getCityByLocation (lat, lon, check) {
 // @author LucaParenti <luca.parenti1@studenti.unimi.it>
 async function handleFavourites (mode) {
   const email = sessionStorage.getItem('email');
+  const xhttp = new XMLHttpRequest();
+  const addButton = document.getElementById('button-favs-add');
+  const removeButton = document.getElementById('button-favs-remove');
 
   // Call to get the favourites we already have
   const getFavs = await fetch("/api/v1/users/get-favourites", {
@@ -137,50 +140,32 @@ async function handleFavourites (mode) {
       favourites.splice(i, 1);
     }
 
-    // Call to update favourites array
-    const removeFavs = await fetch("/api/v1/users/update-favourite", {
-      method: "PATCH",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(
-        {
-          email: email,
-          cityName: '',
-          favourites: favourites
-        }
-      )
-    });
+    // AJAX call to update favourites array and buttons
+    xhttp.onreadystatechange = function () {
+      if (this.readyState === 4 && this.status === 200) {
+        removeButton.classList.add('hidden');
+        addButton.classList.remove('hidden');
+      }
+    };
 
-    const updateFavourites = await removeFavs.json();
-    
-    if (updateFavourites.status === 200) {
-      window.location.href = '/cities?cityName=' + cityName;
-    }
+    xhttp.open("POST", "/api/v1/users/update-favourite");
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify({ email: email, cityName: '', favourites: favourites }));
   }
 
   // SECTION - ADD - If we have to add
   if (mode === 'add') {
-    // Call to update favourites array
-    const addFavs = await fetch("/api/v1/users/update-favourite", {
-      method: "PATCH",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(
-        {
-          email: email,
-          cityName: cityName.toLowerCase(),
-          favourites: favourites
-        }
-      )
-    });
+    xhttp.onreadystatechange = function () {
+      if (this.readyState === 4 && this.status === 200) {
+        removeButton.classList.remove('hidden');
+        addButton.classList.add('hidden');
+      }
+    };
 
-    const updateFavourites = await addFavs.json();
-    
-    if (updateFavourites.status === 200) {
-      window.location.href = '/cities?cityName=' + cityName;
-    }
+    // AJAX call to update favourites array and buttons
+    xhttp.open("POST", "/api/v1/users/update-favourite");
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify({ email: email, cityName: cityName.toLowerCase(), favourites: favourites }));
   }
 }
 
@@ -205,16 +190,16 @@ async function handleButtons (cityName) {
     });
 
     const favourites = await favs.json();
-    const add = document.getElementById('button-favs-add');
-    const remove = document.getElementById('button-favs-remove');
+    const addButton = document.getElementById('button-favs-add');
+    const removeButton = document.getElementById('button-favs-remove');
 
     // Show the correct buttons each page
     if (favourites.includes(cityName.toLowerCase())) {
-      remove.classList.remove('hidden');
-      add.classList.add('hidden');
+      removeButton.classList.remove('hidden');
+      addButton.classList.add('hidden');
     } else {
-      add.classList.remove('hidden');
-      remove.classList.add('hidden');
+      addButton.classList.remove('hidden');
+      removeButton.classList.add('hidden');
     }
   }
 }
