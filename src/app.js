@@ -151,7 +151,7 @@ app.post('/api/v1/users/get-favourites', async (req, res) => {
   });
 });
 
-app.patch('/api/v1/users/update-favourite', async (req, res) => {
+app.post('/api/v1/users/update-favourite', async (req, res) => {
   const email = req.body.email;
   const cityName = req.body.cityName;
   var favourites = req.body.favourites;
