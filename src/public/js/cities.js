@@ -51,7 +51,9 @@ async function searchCityForecast (city) {
 
     myMap.on('click', async (ev) => {
       pos.setLatLng(ev.latlng);
-      getCityByLocation(ev.latlng.lat, ev.latlng.lng, false)
+      this.lat = ev.latlng.lat;
+      this.lon = ev.latlng.lng;
+      getCityByLocation(ev.latlng.lat, ev.latlng.lng, false);
     });
   } catch (err) {
     console.log(err);
@@ -63,8 +65,15 @@ async function searchCityForecast (city) {
 async function getCityByLocation (lat, lon, check) {
   if (lat !== null && lon !== null) {
     const weatherResponse = await validator(`/api/v1/getPositionalWeather/${lat}/${lon}`);
+    const radarButton = document.getElementById('satellite-rain-map');
     lat = weatherResponse.coord.lat;
     lon = weatherResponse.coord.lon;
+
+    if ((lat < 36.51 || lat > 47.21) || (lon < 6.65 || lon > 18.54)) {
+      radarButton.classList.add('hidden');
+    } else {
+      radarButton.classList.remove('hidden');
+    }
 
     if (weatherResponse.name === undefined) {
       document.getElementById('pos').innerText = 'Posizione: Sconosciuta';
@@ -99,7 +108,9 @@ async function getCityByLocation (lat, lon, check) {
 
       myMap.on('click', async (ev) => {
         pos.setLatLng(ev.latlng);
-        getCityByLocation(ev.latlng.lat, ev.latlng.lng, false)
+        this.lat = ev.latlng.lat;
+        this.lon = ev.latlng.lng;
+        getCityByLocation(ev.latlng.lat, ev.latlng.lng, false);
       });
     }
   } else {
@@ -207,13 +218,9 @@ async function handleButtons (cityName) {
 // Functions that loads radar animation for rain forecast
 // @author LucaParenti <luca.parenti1@studenti.unimi.it>
 async function showRainMap () {
-  const urlParams = new URLSearchParams(window.location.search);
-  const city = urlParams.get("cityName");
-  
-  if (city !== null && city !== undefined) {
-    const weatherResponse = await validator(`/api/v1/getCityWeather/${city}`);
-    const latitude = weatherResponse.coord.lat;
-    const longitude = weatherResponse.coord.lon;
+  if (this.lat !== undefined && this.lon !== undefined) {
+    const latitude = this.lat;
+    const longitude = this.lon;
 
     // Check latitude
     if (latitude > 44.11 && latitude < 46.9) {
