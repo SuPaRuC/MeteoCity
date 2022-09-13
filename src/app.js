@@ -76,8 +76,8 @@ mongoose.connect(
 app.get('/api/v1/getCityWeather/:city', (req, res) => {
   const city = req.params.city;
 
-  axios.get(`${process.env.WEATHER_API_LINK}?q=${city}&appid=${process.env.WEATHER_API_KEY}&lang=it`)
-    .then((cityData) => axios.get(`${process.env.WEATHER_API_LINK}?lat=${cityData.data.coord.lat}&lon=${cityData.data.coord.lon}&appid=${process.env.WEATHER_API_KEY}&units=metric&lang=it`))
+  axios.get(`${process.env.WEATHER_API_LINK}?q=${city}&appid=${process.env.WEATHER_API_KEY}&lang=${process.env.WEATHER_LANG}`)
+    .then((cityData) => axios.get(`${process.env.WEATHER_API_LINK}?lat=${cityData.data.coord.lat}&lon=${cityData.data.coord.lon}&appid=${process.env.WEATHER_API_KEY}&units=metric&lang=${process.env.WEATHER_LANG}`))
     .then((weather) => res.send(weather.data))
     .catch((err) => res.json({error: `Città non trovata, Info: ${err}`}));
 });
@@ -86,7 +86,7 @@ app.get('/api/v1/getPositionalWeather/:lat/:lon', (req, res) => {
   const lat = req.params.lat;
   const lon = req.params.lon;
 
-  axios.get(`${process.env.WEATHER_API_LINK}?lat=${lat}&lon=${lon}&appid=${process.env.WEATHER_API_KEY}&units=metric&lang=it`)
+  axios.get(`${process.env.WEATHER_API_LINK}?lat=${lat}&lon=${lon}&appid=${process.env.WEATHER_API_KEY}&units=metric&lang=${process.env.WEATHER_LANG}`)
     .then((weather) => res.send(weather.data))
     .catch((err) => res.json({error: `Città non trovata, Info: ${err}`}));
 });
