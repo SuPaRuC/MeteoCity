@@ -1,6 +1,6 @@
 {
   "name": "meteocity",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Meteo App for 'Programmazione Web e Mobile' exam",
   "main": "app.js",
   "scripts": {
